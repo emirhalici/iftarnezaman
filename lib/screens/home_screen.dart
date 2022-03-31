@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iftarnezaman/providers/main_provider.dart';
+import 'package:iftarnezaman/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,26 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      margin: const EdgeInsets.all(32),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ayarlar',
-                            style: TextStyle(fontSize: 34.sp),
-                            textAlign: TextAlign.start,
-                          ),
-                          SizedBox(height: 400.h),
-                        ],
-                      ),
-                    );
-                  });
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => const SettingsScreen()),
+                ),
+              );
             },
           ),
         ],
