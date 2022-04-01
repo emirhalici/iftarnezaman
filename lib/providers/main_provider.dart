@@ -47,6 +47,20 @@ class MainProvider with ChangeNotifier {
     }
   }
 
+  Future<String> getCityName() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String city = 'Ankara';
+    int ilce = pref.getInt('ilce') ?? 9206;
+    if (ilce == 9206) {
+      city = 'Ankara';
+    } else if (ilce == 9819) {
+      city = 'Samsun';
+    } else if (ilce == 9470) {
+      city = 'Eskisehir';
+    }
+    return city;
+  }
+
   void startTimer() async {
     final prefs = await SharedPreferences.getInstance();
     int ilceId = prefs.getInt('ilce') ?? 9206;

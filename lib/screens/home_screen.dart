@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iftarnezaman/providers/main_provider.dart';
 import 'package:iftarnezaman/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,16 +14,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String city = 'Ankara';
+
   @override
   void initState() {
     super.initState();
     context.read<MainProvider>().startTimer();
   }
 
+  void getCity() async {
+    String _city = await context.watch<MainProvider>().getCityName();
+    setState(() {
+      city = _city;
+    });
+  }
+
   format(Duration d) => d.toString().split('.').first.padLeft(8, "0");
 
   @override
   Widget build(BuildContext context) {
+    getCity();
+
     Duration aksam = context.watch<MainProvider>().timeLeftForNextAksam;
     Duration imsak = context.watch<MainProvider>().timeLeftForNextImsak;
     return Scaffold(
@@ -47,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('Sehir: $city'),
             Text(
               'Bir sonraki iftara kalan sure:',
               style: TextStyle(fontSize: 24.sp),
