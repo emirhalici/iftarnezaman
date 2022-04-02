@@ -60,22 +60,22 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Sehir: $city'),
-            Text(
+            const Text(
               'Bir sonraki iftara kalan sure:',
-              style: TextStyle(fontSize: 24.sp),
+              style: TextStyle(fontSize: 24),
             ),
             Text(
               format(aksam),
-              style: TextStyle(fontSize: 44.sp),
+              style: const TextStyle(fontSize: 44),
             ),
-            SizedBox(height: 40.h),
-            Text(
+            const SizedBox(height: 40),
+            const Text(
               'Bir sonraki sahura kalan sure:',
-              style: TextStyle(fontSize: 24.sp),
+              style: TextStyle(fontSize: 24),
             ),
             Text(
               format(imsak),
-              style: TextStyle(fontSize: 44.sp),
+              style: const TextStyle(fontSize: 44),
             ),
           ],
         ),

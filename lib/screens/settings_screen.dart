@@ -56,9 +56,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Şehir",
-              style: TextStyle(fontSize: 32.sp),
+              style: TextStyle(fontSize: 32),
             ),
             Row(
               children: [
@@ -74,9 +74,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ],
             ),
             SizedBox(height: 16.h),
-            Text(
+            const Text(
               "İlçe",
-              style: TextStyle(fontSize: 32.sp),
+              style: TextStyle(fontSize: 32),
             ),
           ],
         ),

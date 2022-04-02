@@ -23,7 +23,7 @@ class MainProvider with ChangeNotifier {
 
   Future<List<IlceModel>> getIlceList() async {
     final prefs = await SharedPreferences.getInstance();
-    int cityId = await prefs.getInt('il') ?? 506;
+    int cityId = prefs.getInt('il') ?? 506;
     ilceList = await apiHelper.getIlce(cityId);
     return ilceList;
   }
@@ -45,6 +45,7 @@ class MainProvider with ChangeNotifier {
         return ezan;
       }
     }
+    return null;
   }
 
   Future<String> getCityName() async {
@@ -86,8 +87,6 @@ class MainProvider with ChangeNotifier {
 
     Duration aksamDifference = aksamDateTime.difference(today);
     Duration imsakDifference = imsakDateTime.difference(today);
-
-    print(imsakDifference.toString());
 
     if (aksamDifference.inMinutes < 0) {
       String aksam = '${ezanTomorrow.aksamEzan} $tomorrowDay';
