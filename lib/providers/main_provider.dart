@@ -13,6 +13,9 @@ class MainProvider with ChangeNotifier {
   List<IlceModel> ilceList = [];
   late Timer timer;
   late Timer timer2;
+  EzanModel? _ezan;
+
+  EzanModel? get ezan => _ezan;
 
   Future<List<CityModel>> getCityList() async {
     if (cityList.isEmpty) {
@@ -26,6 +29,15 @@ class MainProvider with ChangeNotifier {
     int cityId = prefs.getInt('il') ?? 506;
     ilceList = await apiHelper.getIlce(cityId);
     return ilceList;
+  }
+
+  int? getCityIdFromCityName(String cityName) {
+    for (var city in cityList) {
+      if (city.cityName == cityName) {
+        return city.cityId;
+      }
+    }
+    return null;
   }
 
   Duration getTimeDifference(DateTime dateTime) {
@@ -57,7 +69,7 @@ class MainProvider with ChangeNotifier {
     } else if (ilce == 9819) {
       city = 'Samsun';
     } else if (ilce == 9470) {
-      city = 'Eskisehir';
+      city = 'Eskişehir';
     }
     return city;
   }
@@ -76,10 +88,10 @@ class MainProvider with ChangeNotifier {
     final String day = DateFormat(pattern).format(today);
     List<EzanModel> ezanList = await apiHelper.getEzan(ilceId);
 
-    EzanModel ezan = getEzanFromDate(DateTime.now(), ezanList)!;
+    _ezan = getEzanFromDate(DateTime.now(), ezanList)!;
     EzanModel ezanTomorrow = getEzanFromDate(tomorrow, ezanList)!;
-    String aksam = '${ezan.aksamEzan} $day';
-    String imsak = '${ezan.imsakEzan} $day';
+    String aksam = '${ezan!.aksamEzan} $day';
+    String imsak = '${ezan!.imsakEzan} $day';
     final formatter = DateFormat('hh:mm dd.MM.yyyy');
 
     DateTime aksamDateTime = formatter.parse(aksam);

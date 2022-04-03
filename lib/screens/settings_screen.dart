@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iftarnezaman/models/city_model.dart';
@@ -23,6 +22,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _switchValue = true;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setBool();
   }
 
   @override
