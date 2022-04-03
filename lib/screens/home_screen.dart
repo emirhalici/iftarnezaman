@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getCity() async {
-    String _city = await context.watch<MainProvider>().getCityName();
+    String _city = await context.watch<MainProvider>().getIlceName();
     setState(() {
       city = _city;
     });
@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text('Sehir: $city'),
           if (ezan == null)
             const Center(child: CircularProgressIndicator.adaptive())
           else

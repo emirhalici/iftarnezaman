@@ -63,21 +63,42 @@ class MainProvider with ChangeNotifier {
   Future<String> getCityName() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String city = 'Ankara';
-    int ilce = pref.getInt('ilce') ?? 9206;
-    if (ilce == 9206) {
-      city = 'Ankara';
-    } else if (ilce == 9819) {
-      city = 'Samsun';
-    } else if (ilce == 9470) {
-      city = 'Eskişehir';
+    int il = pref.getInt('il') ?? 506;
+    if (cityList.isEmpty) {
+      cityList = await getCityList();
     }
+
+    for (var city in cityList) {
+      if (city.cityId == il) {
+        return city.cityName;
+      }
+    }
+
+    return city;
+  }
+
+  Future<String> getIlceName() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String city = 'Ankara';
+    int ilce = pref.getInt('ilce') ?? 9206;
+    if (ilceList.isEmpty) {
+      ilceList = await getIlceList();
+    }
+
+    for (var ilceModel in ilceList) {
+      if (ilceModel.ilceId == ilce) {
+        return ilceModel.ilceName;
+      }
+    }
+
     return city;
   }
 
   void startTimer() async {
     final prefs = await SharedPreferences.getInstance();
     int ilceId = prefs.getInt('ilce') ?? 9206;
-    if (prefs.getInt('ilce') == null) {
+    print(ilceId);
+    if (ilceId == 9206) {
       prefs.setInt('ilce', 9206);
     }
 
