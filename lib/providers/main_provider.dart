@@ -79,25 +79,24 @@ class MainProvider with ChangeNotifier {
 
   Future<String> getIlceName() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String city = 'Ankara';
-    int ilce = pref.getInt('ilce') ?? 9206;
+    String defaultValue = 'Ankara';
+    int ilceId = pref.getInt('ilce') ?? 9206;
     if (ilceList.isEmpty) {
       ilceList = await getIlceList();
     }
 
     for (var ilceModel in ilceList) {
-      if (ilceModel.ilceId == ilce) {
+      if (ilceModel.ilceId == ilceId) {
         return ilceModel.ilceName;
       }
     }
 
-    return city;
+    return defaultValue;
   }
 
   void startTimer() async {
     final prefs = await SharedPreferences.getInstance();
     int ilceId = prefs.getInt('ilce') ?? 9206;
-    print(ilceId);
     if (ilceId == 9206) {
       prefs.setInt('ilce', 9206);
     }

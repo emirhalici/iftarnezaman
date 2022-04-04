@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iftarnezaman/models/city_model.dart';
 import 'package:iftarnezaman/models/ilce_model.dart';
 import 'package:iftarnezaman/providers/main_provider.dart';
@@ -14,13 +13,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _switchValue = false;
   List<CityModel> cityList = [];
   List<String> cityNameList = [];
   List<IlceModel> ilceList = [];
   List<String> ilceNameList = [];
-  String dropdownValue = 'Yükleniyor';
-  String dropdownValue2 = 'Yükleniyor';
+  String dropdownButtonCityValue = 'Yükleniyor';
+  String dropdownButtonIlceValue = 'Yükleniyor';
 
   @override
   void initState() {
@@ -33,13 +31,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     for (var city in cityList) {
       cityNameList.add(city.cityName);
     }
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     String cityName = await context.read<MainProvider>().getCityName();
 
     if (mounted) {
       setState(() {
-        //dropdownValue = cityNameList[0];
-        dropdownValue = cityName;
+        //dropdownButtonCityValue = cityNameList[0];
+        dropdownButtonCityValue = cityName;
       });
     }
 
@@ -53,8 +50,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String ilceName = await context.read<MainProvider>().getIlceName();
     if (mounted) {
       setState(() {
-        //dropdownValue2 = ilceNameList[0];
-        dropdownValue2 = ilceName;
+        //dropdownButtonIlceValue = ilceNameList[0];
+        dropdownButtonIlceValue = ilceName;
       });
     }
   }
@@ -73,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // save the values
             final prefs = await SharedPreferences.getInstance();
             for (var ilce in ilceList) {
-              if (ilce.ilceName == dropdownValue2) {
+              if (ilce.ilceName == dropdownButtonIlceValue) {
                 int ilceId = ilce.ilceId;
                 prefs.setInt('ilce', ilceId);
               }
@@ -103,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 64),
                     child: DropdownButton<String>(
-                      value: dropdownValue,
+                      value: dropdownButtonCityValue,
                       icon: const Icon(Icons.arrow_downward),
                       isExpanded: true,
                       elevation: 16,
@@ -114,10 +111,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       onChanged: (String? newValue) async {
                         setState(() {
-                          dropdownValue = newValue!;
+                          dropdownButtonCityValue = newValue!;
                         });
                         SharedPreferences prefs = await SharedPreferences.getInstance();
-                        int cityId = context.read<MainProvider>().getCityIdFromCityName(dropdownValue)!;
+                        int cityId = context.read<MainProvider>().getCityIdFromCityName(dropdownButtonCityValue)!;
                         prefs.setInt('il', cityId);
                         ilceList = [];
                         ilceNameList = [];
@@ -126,7 +123,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ilceNameList.add(ilce.ilceName);
                         }
                         setState(() {
-                          dropdownValue2 = ilceNameList[0];
+                          dropdownButtonIlceValue = ilceNameList[0];
                         });
                       },
                       items: cityNameList.map<DropdownMenuItem<String>>((String value) {
@@ -152,7 +149,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 64),
                     child: DropdownButton<String>(
-                      value: dropdownValue2,
+                      value: dropdownButtonIlceValue,
                       icon: const Icon(Icons.arrow_downward),
                       isExpanded: true,
                       elevation: 16,
@@ -163,7 +160,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       onChanged: (String? newValue) async {
                         setState(() {
-                          dropdownValue2 = newValue!;
+                          dropdownButtonIlceValue = newValue!;
                         });
                       },
                       items: ilceNameList.map<DropdownMenuItem<String>>((String value) {

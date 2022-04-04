@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String city = 'Ankara';
+  String ilce = 'Ankara';
 
   @override
   void initState() {
@@ -20,10 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<MainProvider>().startTimer();
   }
 
-  void getCity() async {
-    String _city = await context.watch<MainProvider>().getIlceName();
+  void getIlce() async {
+    String _ilce = await context.watch<MainProvider>().getIlceName();
     setState(() {
-      city = _city;
+      ilce = _ilce;
     });
   }
 
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getCity();
+    getIlce();
 
     Duration aksam = context.watch<MainProvider>().timeLeftForNextAksam;
     Duration imsak = context.watch<MainProvider>().timeLeftForNextImsak;
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const SizedBox(height: 10),
                 Text(
-                  '$city İçin Ezan Saatleri',
+                  '$ilce İçin Ezan Saatleri',
                   style: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w500,
