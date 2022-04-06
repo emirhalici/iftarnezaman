@@ -139,7 +139,8 @@ class MainProvider with ChangeNotifier {
       if (timeLeftForNextAksam.inSeconds <= 0) {
         timer.cancel();
       }
-      timeLeftForNextAksam = Duration(seconds: timeLeftForNextAksam.inSeconds - 1);
+      //timeLeftForNextAksam = Duration(seconds: timeLeftForNextAksam.inSeconds - 1);
+      timeLeftForNextAksam = aksamDateTime.difference(DateTime.now());
       notifyListeners();
     });
 
@@ -147,7 +148,8 @@ class MainProvider with ChangeNotifier {
       if (timeLeftForNextImsak.inSeconds <= 0) {
         timer2.cancel();
       }
-      timeLeftForNextImsak = Duration(seconds: timeLeftForNextImsak.inSeconds - 1);
+      //timeLeftForNextImsak = Duration(seconds: timeLeftForNextImsak.inSeconds - 1);
+      timeLeftForNextImsak = imsakDateTime.difference(DateTime.now());
       notifyListeners();
     });
   }

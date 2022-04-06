@@ -47,11 +47,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ilceNameList.add(ilce.ilceName);
     }
 
-    String ilceName = await context.read<MainProvider>().getIlceName();
+    //String ilceName = await context.read<MainProvider>().getIlceName();
     if (mounted) {
       setState(() {
-        //dropdownButtonIlceValue = ilceNameList[0];
-        dropdownButtonIlceValue = ilceName;
+        //dropdownButtonIlceValue = ilceNameList[0]; // first in list
+        //dropdownButtonIlceValue = ilceName; // ilce name
+        dropdownButtonIlceValue = cityName; // city name
       });
     }
   }
