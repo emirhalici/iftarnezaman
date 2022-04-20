@@ -60,8 +60,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: true,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text("Ayarlar"),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -130,7 +132,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       items: cityNameList.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -167,7 +174,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       items: ilceNameList.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
                         );
                       }).toList(),
                     ),

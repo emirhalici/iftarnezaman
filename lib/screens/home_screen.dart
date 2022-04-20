@@ -38,8 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     EzanModel? ezan = context.watch<MainProvider>().ezan;
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text("Iftar Ne Zamandir Lo"),
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
           IconButton(
